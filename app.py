@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from pymongo import MongoClient
 import requests
+from bson import ObjectId
 
 
 app = Flask(__name__)
@@ -108,7 +109,7 @@ def save_ex():
 def delete_ex():
     id = request.form.get('id')
     word = request.form.get('word')
-    db.sentences.delete_one({'_id': (id)})
+    db.sentences.delete_one({'_id': ObjectId(id)})
     return jsonify({'result': 'success'})
 
 if __name__ == '__main__':
