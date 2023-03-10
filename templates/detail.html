@@ -104,7 +104,11 @@ function get_examples() {
                             <li>
                             ${sentence}&nbsp;&nbsp;&nbsp;<a
                             href="javascript:delete_ex('${id}')"
-                            >Delete</a></li>
+                            >Delete</a>
+                            <a
+                            href="javascript:delete_ex_all('${id}')"
+                            >Delete All</a>
+                            </li>
                            
                             `;
                         }
@@ -146,7 +150,8 @@ function delete_ex(id) {
         success: function (response) {
             get_examples()
         }
-    });
+      });
+    }
     function delete_ex_all(id) {
     console.log("deleting", id)
     $.ajax({
@@ -158,9 +163,9 @@ function delete_ex(id) {
         },
         success: function (response) {
             get_examples()
-        }
-    });
-}
+          }
+        });
+      }
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
@@ -209,8 +214,9 @@ function delete_ex(id) {
           <div class="d-flex justify-content-between" style="margin-left:20px;">
               <input id="new-example" class="form-control form-control-sm" style="margin-right: 0.5rem">
               <button class="btn btn-outline-secondary btn-sm" onclick="add_ex()">Add</button>
-              <button class="btn btn-outline-danger btn-sm" onclick="delete_ex_all()">Delete All</button>
+              
           </div>
+
       </div>
     {% endif %}
       </div>
