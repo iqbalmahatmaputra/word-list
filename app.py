@@ -112,5 +112,13 @@ def delete_ex():
     db.sentences.delete_one({'_id': ObjectId(id)})
     return jsonify({'result': 'success'})
 
+@app.route('/api/delete_ex_all', methods=['POST'])
+def delete_ex_all():
+    id = request.form.get('id')
+    word = request.form.get('word')
+    db.sentences.delete_many({'word': word})
+    return jsonify({'result': 'success'})
+
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

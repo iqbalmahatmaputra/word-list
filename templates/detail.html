@@ -115,6 +115,7 @@ function get_examples() {
 }
 
 function add_ex() {
+  
     let new_ex = $('#new-example').val();
     $.ajax({
         type: "POST",
@@ -125,6 +126,7 @@ function add_ex() {
         },
         success: function (response) {
             alert(response.msg)
+            $('#new-example').val("")
             get_examples()
         }
     });
@@ -137,6 +139,19 @@ function delete_ex(id) {
     $.ajax({
         type: "POST",
         url: `/api/delete_ex`,
+        data: {
+            word: word,
+            id: id
+        },
+        success: function (response) {
+            get_examples()
+        }
+    });
+    function delete_ex_all(id) {
+    console.log("deleting", id)
+    $.ajax({
+        type: "POST",
+        url: `/api/delete_ex_all`,
         data: {
             word: word,
             id: id
@@ -193,7 +208,8 @@ function delete_ex(id) {
           </ul>
           <div class="d-flex justify-content-between" style="margin-left:20px;">
               <input id="new-example" class="form-control form-control-sm" style="margin-right: 0.5rem">
-              <button class="btn btn-outline-secondary btn-sm" onclick="add_ex()">add</button>
+              <button class="btn btn-outline-secondary btn-sm" onclick="add_ex()">Add</button>
+              <button class="btn btn-outline-danger btn-sm" onclick="delete_ex_all()">Delete All</button>
           </div>
       </div>
     {% endif %}
